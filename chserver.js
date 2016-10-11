@@ -8,7 +8,7 @@ app.get("/",function(req,res){
 	res.render("index.html");
 })
 var webSocketServer=require("websocket").server;
-var server= require("https").createServer(app);
+var server= require("http").createServer(app);
 server.on("connection",function(socket){
 	console.log("connection from: ",socket.address().address);});
 var ws=new webSocketServer({
