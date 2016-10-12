@@ -1,7 +1,7 @@
 var players=2;
 var express=require('express');
 var app=express();
-port=process.env.PORT || 3000;
+port=3000;
 //port=443;
 app.use(express.static(__dirname));
 app.get("/",function(req,res){
