@@ -5,7 +5,7 @@ port=process.env.PORT ||3000;
 //port=443;
 app.use(express.static(__dirname));
 app.get("/",function(req,res){
-	res.render("index.php");
+	res.render("game.html");
 })
 var webSocketServer=require("websocket").server;
 var server= require("http").createServer(app);
