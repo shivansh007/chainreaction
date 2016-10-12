@@ -76,8 +76,8 @@ var ws;
 
 
 function setupChat(){
-	//var HOST=location.origin.replace(/^http/,'ws');
-	HOST="ws://chainreaction154.herokuapp.com:3000/";
+	var HOST=location.origin.replace(/^http/,'ws');
+	//HOST="ws://chainreaction154.herokuapp.com:3000/";
 	ws=new WebSocket(HOST);
 	write("welcome to very simple chat");
 	ws.addEventListener("open",function(){
