@@ -1,4 +1,7 @@
+var num=[[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0]];
 var players=2;
+var ch=0;
+var player=[['unknown','red'],['unknown','green']];
 var express=require('express');
 var app=express();
 port=process.env.PORT ||3000;
@@ -48,19 +51,39 @@ function closeHandler(){
 }
 
 function messageHandler(message){
+	if(ch==1) ch=2;
+	else ch=1;
+	gameloop();
 	var data=JSON.parse(message.utf8Data);
-	this.nickname=data[2];
-	data=JSON.stringify(data);
-	console.log(this.nickname +"  "+data);
-	broadcast(data);
-}
-/*function game_loop(){
-
-	while(1)
-	{
-		for(i=0;i<players;i++)
-		{
-
-		}
+	if(data[0]=='initializePlayer'){
+		initializePlayer(data[1]);
 	}
-}*/
+	else if (data[0]=='onclicked') {
+		onclicked(data);
+	}
+	console.log(this.nickname +"  "+data);
+}
+function gameloop(){
+	clients.forEach(function(client){
+		if(client.nickname==clients[ch-1].nickname){
+				client.sendUTF(JSON.stringify(['update','false',player[ch-1][0],player[ch-1][1]]));
+		}
+		else {
+				client.sendUTF(JSON.stringify(['update','true',player[ch-1][0],player[ch-1][1]]));
+		}
+	});
+}
+var initializePlayer=function(name){
+	this.nickname=name;
+	if(clients.length==2){
+		player[0][0]=clients[0].nickname;
+		player[1][0]=clients[1].nickname;
+		ch==2;
+	}
+}
+
+var onclicked=function(msg){
+	msg[0]='initiate';
+	data=JSON.stringify(msg);
+	broadcast(msg);
+}
