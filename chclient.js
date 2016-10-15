@@ -4,12 +4,13 @@ var ws;
 var prevColor='';
 var color='';
 var win=0;
+var player=[['','red'],['','green']];
 			var name=prompt("enter your name");
 			function checkgame(x,y)
 			{
 				var arr=['onclicked',x,y,name];
 				jarr=JSON.stringify(arr);
-				if(colorarray[x][y]=='' || colorarray[x][y]==prevColor)
+				if(colorarray[x][y]=='' || colorarray[x][y]==color)
 					ws.send(jarr);
 				else {
 					console.log('cant click here');
@@ -22,8 +23,8 @@ var win=0;
 				num[x][y]++;
 				var pt=""+x+y;
 				document.getElementById(pt).innerHTML=num[x][y];
-				console.log(colorarray);
-				console.log(color);
+				//console.log(colorarray);
+				//console.log(color);
 				check(x,y,num[x][y],color);
 				checkWin();
 			}
@@ -104,6 +105,7 @@ function setupChat(){
 	write("welcome to very simple chat");
 	ws.addEventListener("open",function(){
 		write("opened connection");
+		sendName();
 	},false);
 	ws.addEventListener("message",function(e){
 		var recvdata=JSON.parse(e.data);
@@ -113,11 +115,14 @@ function setupChat(){
 		else if (recvdata[0]=='initiate') {
 			initiate(recvdata);
 		}
+		else if (recvdata[0]=='initializePlayer') {
+			initializePlayer(recvdata[1]);
+		}
 	},false);
 	ws.addEventListener("close",function(){
 		write("connection closed");
 	},false);
-	sendName();
+	//sendName();
 }
 
 window.addEventListener("load",setupChat,false);
@@ -143,9 +148,15 @@ function write(str){
 function updateui(udata){
 	prevColor=color;
 	color=udata[3];
+	console.log(player);
 	console.log(udata[1],udata[2],udata[3]);
+	var inputs=document.getElementsByTagName('tr');
+  for(var i=0; i<inputs.length; ++i)
+	inputs[i].style.pointerEvents =udata[1];
 }
-
+function initializePlayer(pdata) {
+	player=pdata;
+}
 function checkWin()
 {
  var a=0,b=0,c=0;
@@ -154,17 +165,23 @@ function checkWin()
   {
     if(num[i][j]!=0)
      a++;
-    if(colorarray[i][j]=='red')
+    if(colorarray[i][j]==player[0][1])
      b++;
-    else if(colorarray[i][j]=='green')
+    else if(colorarray[i][j]==player[1][1])
      c++;
   }
  if(a==b && a>=2)
  {
-   console.log("player 1 won");
+   alert(player[0][0]+"won");
+	 player=[['','red'],['','green']];
+	 ws.send(JSON.stringify(['reinit']));
+	 location.reload();
  }
  if(a==c && a>=2)
  {
-   console.log("player 2 won");
+   alert(player[1][0]+"won");
+	 player=[['','red'],['','green']];
+	 ws.send(JSON.stringify(['reinit']));
+	 location.reload();
  }
 }

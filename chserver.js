@@ -1,7 +1,7 @@
-var num=[[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0]];
+//var num=[[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0]];
 var players=2;
 var ch=0;
-var player=[['un','red'],['unn','green']];
+var player=[['player1','red'],['player2','green']];
 var express=require('express');
 var app=express();
 port=process.env.PORT ||3000;
@@ -51,34 +51,41 @@ function closeHandler(){
 }
 
 function messageHandler(message){
-	if(ch==1) ch=2;
-	else ch=1;
-	gameloop();
 	var data=JSON.parse(message.utf8Data);
 	if(data[0]=='initializePlayer'){
-		initializePlayer(data[1]);
+		initializePlayer(data[1],this);
 	}
 	else if (data[0]=='onclicked') {
 		onclicked(data);
 	}
+	else if (data[0]=='reinit') {
+		ch=0;
+	}
 	console.log(this.nickname +"  "+data);
+	if(clients.length>=2)
+		gameloop();
 }
+
 function gameloop(){
+	if(ch==1) ch=2;
+	else ch=1;
 	clients.forEach(function(client){
 		if(client.nickname==clients[ch-1].nickname){
-				client.sendUTF(JSON.stringify(['updateui','false',player[ch-1][0],player[ch-1][1]]));
+				client.sendUTF(JSON.stringify(['updateui','auto',player[ch-1][0],player[ch-1][1]]));
 		}
 		else {
-				client.sendUTF(JSON.stringify(['updateui','true',player[ch-1][0],player[ch-1][1]]));
+				client.sendUTF(JSON.stringify(['updateui','none',player[ch-1][0],player[ch-1][1]]));
 		}
 	});
 }
-var initializePlayer=function(name){
-	this.nickname=name;
-	if(clients.length==2){
+function initializePlayer(name,conn){
+	conn.nickname=name;
+	if(clients.length==1)
 		player[0][0]=clients[0].nickname;
+	if(clients.length==2){
 		player[1][0]=clients[1].nickname;
-		ch==2;
+		ch=1;
+		broadcast(JSON.stringify(['initializePlayer',player]));
 	}
 }
 
