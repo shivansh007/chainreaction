@@ -48,7 +48,7 @@ function closeHandler(){
 		clients.splice(index,1);
 	}
 		console.log(this.nickname + "left the game");
-		var logsd=this.nickname + " left the game";
+		var logsd=">>>"+this.nickname + " left the game";
 		broadcast(JSON.stringify(['logsContent',logsd,'red']));
 }
 
@@ -84,14 +84,14 @@ function initializePlayer(name,conn){
 	conn.nickname=name;
 	if(clients.length==1){
 		player[0][0]=clients[0].nickname;
-		broadcast(JSON.stringify(['logsContent',player[0][0]+" entered game",'blue']));
+		broadcast(JSON.stringify(['logsContent','>>>'+player[0][0]+" entered game",'blue']));
 	}
 	if(clients.length==2){
 		player[1][0]=clients[1].nickname;
-		broadcast(JSON.stringify(['logsContent',player[1][0]+" entered game",'blue']));
+		broadcast(JSON.stringify(['logsContent','>>>'+player[1][0]+" entered game",'blue']));
 		ch=1;
 		broadcast(JSON.stringify(['initializePlayer',player]));
-		broadcast(JSON.stringify(['logsContent','GAME STARTED','green']));
+		broadcast(JSON.stringify(['logsContent','>>>'+'GAME STARTED','green']));
 	}
 }
 

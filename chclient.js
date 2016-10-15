@@ -104,9 +104,10 @@ function setupChat(){
 	var HOST=location.origin.replace(/^http/,'ws');
 	//HOST="ws://chainreaction154.herokuapp.com:3000/";
 	ws=new WebSocket(HOST);
-	write("welcome to very simple chat");
+	write("___________CHAIN REACTION___________")
+	write("______**developed by Blesson thomas**______");
 	ws.addEventListener("open",function(){
-		write("opened connection");
+		write(">>>opened connection");
 		sendName();
 		preloadimages(['redSingle.png', 'greenSingle.png', 'redDouble.png','greenDouble.png','redTriple.png','greenTriple.png']);
 	},false);
@@ -126,7 +127,7 @@ function setupChat(){
 		}
 	},false);
 	ws.addEventListener("close",function(){
-		write("connection closed");
+		write(">>>connection closed");
 	},false);
 	//sendName();
 }
@@ -150,6 +151,8 @@ function sendName(){
 function write(str){
 	//var response = document.getElementById("response"),
 	console.log(str);
+	str=["logsContent",str,'black'];
+	logsContent(str);
 }
 function updateui(udata){
 	prevColor=color;
