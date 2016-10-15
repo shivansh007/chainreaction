@@ -107,6 +107,7 @@ function setupChat(){
 	ws.addEventListener("open",function(){
 		write("opened connection");
 		sendName();
+		preloadimages(['redSingle.png', 'greenSingle.png', 'redDouble.png','greenDouble.png','redTriple.png','greenTriple.png']);
 	},false);
 	ws.addEventListener("message",function(e){
 		var recvdata=JSON.parse(e.data);
@@ -188,4 +189,13 @@ function checkWin()
 	 ws.send(JSON.stringify(['reinit']));
 	 location.reload();
  }
+}
+
+function preloadimages(arr){
+    var newimages=[];
+    var arr=(typeof arr!="object")? [arr] : arr ;//force arr parameter to always be an array
+    for (var i=0; i<arr.length; i++){
+        newimages[i]=new Image();
+        newimages[i].src=arr[i];
+    }
 }
