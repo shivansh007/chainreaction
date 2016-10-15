@@ -1,21 +1,31 @@
 var num=[[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0]];
 var colorarray=[['','','','','',''],['','','','','',''],['','','','','',''],['','','','','',''],['','','','','',''],['','','','','',''],['','','','','',''],['','','','','',''],['','','','','','']];
 var ws;
+var prevColor='';
 var color='';
+var win=0;
 			var name=prompt("enter your name");
 			function checkgame(x,y)
-			{	var arr=['onclicked',x,y,name];
+			{
+				var arr=['onclicked',x,y,name];
 				jarr=JSON.stringify(arr);
-				ws.send(jarr);
+				if(colorarray[x][y]=='' || colorarray[x][y]==prevColor)
+					ws.send(jarr);
+				else {
+					console.log('cant click here');
+				}
 			}
-			function initiate(arr)
-			{	jdec=JSON.parse(arr);
-				var x=jdec[0];
-				var y=jdec[1];
+			function initiate(jdec)
+			{	//jdec=JSON.parse(arr);
+				var x=jdec[1];
+				var y=jdec[2];
 				num[x][y]++;
 				var pt=""+x+y;
 				document.getElementById(pt).innerHTML=num[x][y];
+				console.log(colorarray);
+				console.log(color);
 				check(x,y,num[x][y],color);
+				checkWin();
 			}
 
 			function check(x,y,value,color)
@@ -37,7 +47,7 @@ var color='';
 				draw(x,y,color);
 			}
 			function brkblk(x,y,color)
-			{	colorarray='';
+			{	colorarray[x][y]='';
 				num[x][y]=0;
 				if(x!=0)
 				{	colorarray[x-1][y]=color;
@@ -64,17 +74,25 @@ var color='';
 			{
 				var pt=""+x+y;
 				var imgdiv=document.getElementById(pt);
-				if(num[x][y]==0)
+				if(num[x][y]==0){
 					document.getElementById(pt).innerHTML="";
-				if(num[x][y]==1)
-					//document.getElementById(pt).innerHTML="<img src="+color+'Single.png'+"width=45px height=45px/>";
-					imgdiv.src=color+'Single.png';
-				if(num[x][y]==2)
-					//document.getElementById(pt).innerHTML="<img src='redDouble.png' width=45px height=45px />";
-					imgdiv.src=color+'Double.png';
-				if(num[x][y]==3)
-					//document.getElementById(pt).innerHTML="<img src='redTriple.png' width=45px height=45px />";
-					imgdiv.src=color+'Triple.png';
+					colorarray[x][y]='';
+				}
+				if(num[x][y]==1){
+					document.getElementById(pt).innerHTML="<img src="+color+'Single.png' + " width=45px height=45px/>";
+					colorarray[x][y]=color;
+					//imgdiv.src=color+'Single.png';
+				}
+				if(num[x][y]==2){
+					document.getElementById(pt).innerHTML="<img src="+color+'Double.png' + " width=45px height=45px/>";
+					//imgdiv.src=color+'Double.png';
+					colorarray[x][y]=color;
+				}
+				if(num[x][y]==3){
+					document.getElementById(pt).innerHTML="<img src="+color+'Triple.png' + " width=45px height=45px/>";
+					//imgdiv.src=color+'Triple.png';
+					colorarray[x][y]=color;
+				}
 			}
 
 
@@ -89,8 +107,8 @@ function setupChat(){
 	},false);
 	ws.addEventListener("message",function(e){
 		var recvdata=JSON.parse(e.data);
-		if(recvdata[0]=='update'){
-			update(recvdata);
+		if(recvdata[0]=='updateui'){
+			updateui(recvdata);
 		}
 		else if (recvdata[0]=='initiate') {
 			initiate(recvdata);
@@ -122,7 +140,31 @@ function write(str){
 	//var response = document.getElementById("response"),
 	console.log(str);
 }
-function update(udata){
+function updateui(udata){
+	prevColor=color;
 	color=udata[3];
-	console.log(udata[2]+"turn. Color is"+udata[3]+"condition="+udata[0]);
+	console.log(udata[1],udata[2],udata[3]);
+}
+
+function checkWin()
+{
+ var a=0,b=0,c=0;
+ for(i=0;i<9;i++)
+  for(j=0;j<6;j++)
+  {
+    if(num[i][j]!=0)
+     a++;
+    if(colorarray[i][j]=='red')
+     b++;
+    else if(colorarray[i][j]=='green')
+     c++;
+  }
+ if(a==b && a>=2)
+ {
+   console.log("player 1 won");
+ }
+ if(a==c && a>=2)
+ {
+   console.log("player 2 won");
+ }
 }

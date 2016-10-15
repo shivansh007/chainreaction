@@ -1,7 +1,7 @@
 var num=[[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0]];
 var players=2;
 var ch=0;
-var player=[['unknown','red'],['unknown','green']];
+var player=[['un','red'],['unn','green']];
 var express=require('express');
 var app=express();
 port=process.env.PORT ||3000;
@@ -66,10 +66,10 @@ function messageHandler(message){
 function gameloop(){
 	clients.forEach(function(client){
 		if(client.nickname==clients[ch-1].nickname){
-				client.sendUTF(JSON.stringify(['update','false',player[ch-1][0],player[ch-1][1]]));
+				client.sendUTF(JSON.stringify(['updateui','false',player[ch-1][0],player[ch-1][1]]));
 		}
 		else {
-				client.sendUTF(JSON.stringify(['update','true',player[ch-1][0],player[ch-1][1]]));
+				client.sendUTF(JSON.stringify(['updateui','true',player[ch-1][0],player[ch-1][1]]));
 		}
 	});
 }
@@ -84,6 +84,6 @@ var initializePlayer=function(name){
 
 var onclicked=function(msg){
 	msg[0]='initiate';
-	data=JSON.stringify(msg);
+	msg=JSON.stringify(msg);
 	broadcast(msg);
 }
