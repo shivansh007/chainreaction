@@ -93,6 +93,7 @@ var player=[['','red'],['','green']];
 					document.getElementById(pt).innerHTML="<img src="+color+'Triple.png' + " width=45px height=45px/>";
 					//imgdiv.src=color+'Triple.png';
 					colorarray[x][y]=color;
+
 				}
 			}
 
@@ -151,6 +152,9 @@ function updateui(udata){
 	console.log(player);
 	console.log(udata[1],udata[2],udata[3]);
 	var inputs=document.getElementsByTagName('tr');
+	document.getElementById('dispname').innerHTML=udata[2]+"'s turn";
+	document.getElementById('dispname').style.color=color;
+	document.getElementById('chcol').style.border="2px solid "+color;
   for(var i=0; i<inputs.length; ++i)
 	inputs[i].style.pointerEvents =udata[1];
 }

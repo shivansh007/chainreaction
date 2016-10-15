@@ -8,38 +8,56 @@
 	<script src="chclient.js"></script>
 	<style>
 	ul{
-		list-style-type: none;
+			list-style-type: none;
 	    margin: 0;
 	    padding: 0;
 	    overflow: hidden;
-	    background-color: rgb(0,60,66);
+	    background-color: #d0d0d0;
+			border-radius:5px 5px 0px 0px;
+			box-shadow: 0 4px 8px 1px rgba(0, 0, 0, 0.4), 0 6px 20px 1px rgba(0, 0, 0, 0.4);
 	}
-
-	li a {
-	    display: block;
-	    color: white;
-	    text-align: left;
-		font-size:25px;
-	    padding: 4px 10px;
-	    text-decoration: none;
+	li{
+		float: left;
+		#color: rgb(100,255,100);
+		font-size: 17px;
+		font-style: italic;
+	}
+	li a{
+	    display:block;
+	    color: black;
+			padding: 5px 5px;
+			text-decoration: none;
+			font-size:17px;
+			font-family:"Comic Sans MS", cursive, sans-serif;
+			font-style:italic;
+	}
+	#dispname{
+		padding: 5px 20px 5px 5px;
+		color: rgb(100,255,100);
+	}
+	#chcol{
+		width: 99%;
+		border:2px solid blue;
 	}
 	</style>
 </head>
 <body>
 	<ul>
 	  <li><a href="#home">Chain Reaction</a></li>
+		<li style="float:right" id="dispname"></li>
 	</ul>
+	<div id="chcol"></div>
 	<div id="game">
 		<div class="splash-screen"></div>
 		<div class="main-menu"></div>
-			<table id="grid" border="5" cellspacing="0" style="border-color:teal">
+			<table id="grid" border="5" cellspacing="0" style="border-color:rgba(50,57,149,.7)">
 				<tr>
-					<td onclick="checkgame(0,0)" id="00"  disabled></td>
-					<td onclick="checkgame(0,1)" id="01" disabled></td>
-					<td onclick="checkgame(0,2)" id="02" disabled></td>
-					<td onclick="checkgame(0,3)" id="03" disabled></td>
-					<td onclick="checkgame(0,4)" id="04" disabled></td>
-					<td onclick="checkgame(0,5)" id="05" disabled></td>
+					<td onclick="checkgame(0,0)" id="00"></td>
+					<td onclick="checkgame(0,1)" id="01"></td>
+					<td onclick="checkgame(0,2)" id="02"></td>
+					<td onclick="checkgame(0,3)" id="03"></td>
+					<td onclick="checkgame(0,4)" id="04"></td>
+					<td onclick="checkgame(0,5)" id="05"></td>
 				<tr>
 				<tr>
 					<td onclick="checkgame(1,0)" id="10"></td>
