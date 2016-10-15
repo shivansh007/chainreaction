@@ -5,6 +5,7 @@ var prevColor='';
 var color='';
 var win=0;
 var player=[['','red'],['','green']];
+var pid=1;
 			var name=prompt("enter your name");
 			function checkgame(x,y)
 			{
@@ -120,6 +121,9 @@ function setupChat(){
 		else if (recvdata[0]=='initializePlayer') {
 			initializePlayer(recvdata[1]);
 		}
+		else if (recvdata[0]=='logsContent'){
+			logsContent(recvdata);
+		}
 	},false);
 	ws.addEventListener("close",function(){
 		write("connection closed");
@@ -198,4 +202,21 @@ function preloadimages(arr){
         newimages[i]=new Image();
         newimages[i].src=arr[i];
     }
+}
+
+function displayLogs(){
+	document.getElementById('logs').style.display='block';
+}
+function closeLogs() {
+	document.getElementById('logs').style.display='none';
+
+}
+function logsContent(data) {
+	var outdiv=document.getElementById('logsbody');
+	var idiv=document.createElement('div');
+	idiv.id=pid+'';
+	idiv.style.color=data[2];
+	outdiv.appendChild(idiv);
+	document.getElementById(pid+'').innerHTML=data[1];
+	pid+=1;
 }
