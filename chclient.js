@@ -8,7 +8,8 @@ var player=[['','red'],['','green']];
 var pid=1;
 			var name=prompt("enter your name");
 			function checkgame(x,y)
-			{	var arr=['onclicked',x,y,name];
+			{
+				var arr=['onclicked',x,y,name];
 				jarr=JSON.stringify(arr);
 				if(colorarray[x][y]=='' || colorarray[x][y]==color)
 					ws.send(jarr);
@@ -27,7 +28,6 @@ var pid=1;
 				//console.log(color);
 				check(x,y,num[x][y],color);
 				checkWin();
-				animate_ball(x,y);
 			}
 
 			function check(x,y,value,color)
@@ -36,18 +36,15 @@ var pid=1;
 				{
 					if((x==0&&y==0) || (x==8&&y==0) || (x==0&&y==5) || (x==8&&y==5))
 						brkblk(x,y,color);
-					//	animate_ball(x,y);
 				}
 				if(value==3)
 				{
 					if((x==0) || (x==8 || (y==0) || (y==5)))
 						brkblk(x,y,color);
-					//	animate_ball(x,y);
 				}
 				if(value==4)
 				{
 						brkblk(x,y,color);
-					//	animate_ball(x,y);
 				}
 				draw(x,y,color);
 			}
@@ -84,18 +81,17 @@ var pid=1;
 					colorarray[x][y]='';
 				}
 				if(num[x][y]==1){
-					document.getElementById(pt).innerHTML="<img src="+color+'Single.png' + " width=45px height=45px>";
-
+					document.getElementById(pt).innerHTML="<img src="+color+'Single.png' + " width=45px height=45px/>";
 					colorarray[x][y]=color;
 					//imgdiv.src=color+'Single.png';
 				}
 				if(num[x][y]==2){
-					document.getElementById(pt).innerHTML="<img src="+color+'Double.png' + " width=45px height=45px>";
+					document.getElementById(pt).innerHTML="<img src="+color+'Double.png' + " width=45px height=45px/>";
 					//imgdiv.src=color+'Double.png';
 					colorarray[x][y]=color;
 				}
 				if(num[x][y]==3){
-					document.getElementById(pt).innerHTML="<img src="+color+'Triple.png' + " width=45px height=45px>";
+					document.getElementById(pt).innerHTML="<img src="+color+'Triple.png' + " width=45px height=45px/>";
 					//imgdiv.src=color+'Triple.png';
 					colorarray[x][y]=color;
 
@@ -226,11 +222,4 @@ function logsContent(data) {
 	outdiv.appendChild(idiv);
 	document.getElementById(pid+'').innerHTML=data[1];
 	pid+=1;
-}
-
-function animate_ball(x,y,color) {
-		var imidl=''+x+y;
-		var imidr=''+x+y+'ir';
-		document.getElementById('an').src=color+'Single.png';
-  	document.getElementById('an').className='animate-ball-l';
 }
