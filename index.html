@@ -86,6 +86,44 @@
 		height: 410px;
 		overflow:auto;
 	}
+	.animate-ball-l{
+		position: relative;
+		animation-name: animebl;
+		animation-duration: .5s;
+	}
+	@keyframes animebl{
+		from {left:0px;}
+		to	{left:50px;}
+}
+	.animate-ball-r{
+		position: relative;
+		animation-name: animebr;
+		animation-duration: .5s;
+	}
+	@keyframes animebr{
+		from {right:0px;}
+		to	{right:50px;}
+	}
+	.animate-ball-t{
+		position: relative;
+		animation-name: animebt;
+    animation-duration: .5s;
+	}
+	@keyframes animebt{
+		from {top:0px;}
+		to	{top:50px;}
+	}
+	.animate-ball-d{
+		position: relative;
+		animation-name: animebd;
+    animation-duration: .5s;
+	}
+@keyframes animebd{
+	from {top:0px;}
+	to	{top:-50px;}
+}
+
+
 	</style>
 </head>
 <body>
@@ -102,17 +140,48 @@
 
 		</div>
 	</div>
+	<div><img src="redSingle.png" class="qwe" id="an"></div>
 	<div id="game">
 		<div class="splash-screen"></div>
 		<div class="main-menu"></div>
 			<table id="grid" border="5" cellspacing="0" style="border-color:rgba(50,57,149,.7)">
 				<tr style="pointer-events: none">
-					<td onclick="checkgame(0,0)" id="00"></td>
-					<td onclick="checkgame(0,1)" id="01"></td>
-					<td onclick="checkgame(0,2)" id="02"></td>
-					<td onclick="checkgame(0,3)" id="03"></td>
-					<td onclick="checkgame(0,4)" id="04"></td>
-					<td onclick="checkgame(0,5)" id="05"></td>
+					<td onclick="checkgame(0,0)" id="00">
+							<img src="" id="an" class="qwe"></img>
+							<img src="" id="an" class="qwe"></img>
+							<img src="" id="an" class="qwe"></img>
+							<img src="" id="an" class="qwe"></img>
+					</td>
+					<td onclick="checkgame(0,1)" id="01">
+							<img src="" id="an" class="qwe"></img>
+							<img src="" id="an" class="qwe"></img>
+							<img src="" id="an" class="qwe"></img>
+							<img src="" id="an" class="qwe"></img>
+					</td>
+					<td onclick="checkgame(0,2)" id="02">
+							<img src="" id="an" class="qwe"></img>
+							<img src="" id="an" class="qwe"></img>
+							<img src="" id="an" class="qwe"></img>
+							<img src="" id="an" class="qwe"></img>
+					</td>
+					<td onclick="checkgame(0,3)" id="03">
+							<img src="" id="an" class="qwe"></img>
+							<img src="" id="an" class="qwe"></img>
+							<img src="" id="an" class="qwe"></img>
+							<img src="" id="an" class="qwe"></img>
+					</td>
+					<td onclick="checkgame(0,4)" id="04">
+							<img src="" id="an" class="qwe"></img>
+							<img src="" id="an" class="qwe"></img>
+							<img src="" id="an" class="qwe"></img>
+							<img src="" id="an" class="qwe"></img>
+					</td>
+					<td onclick="checkgame(0,5)" id="05">
+							<img src="" id="an" class="qwe"></img>
+							<img src="" id="an" class="qwe"></img>
+							<img src="" id="an" class="qwe"></img>
+							<img src="" id="an" class="qwe"></img>
+					</td>
 				<tr>
 				<tr style="pointer-events: none">
 					<td onclick="checkgame(1,0)" id="10"></td>
