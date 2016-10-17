@@ -15,6 +15,7 @@ var pid=1;
 					ws.send(jarr);
 				else {
 					console.log('cant click here');
+					popups(['pop','cant click here']);
 				}
 			}
 			function initiate(jdec)
@@ -125,9 +126,13 @@ function setupChat(){
 		else if (recvdata[0]=='logsContent'){
 			logsContent(recvdata);
 		}
+		else if (recvdata[0]=='popups'){
+			popups(recvdata);
+		}
 	},false);
 	ws.addEventListener("close",function(){
 		write(">>>connection closed");
+		popups(['pop',"connection closed try reloading."]);
 	},false);
 	//sendName();
 }
@@ -222,4 +227,10 @@ function logsContent(data) {
 	outdiv.appendChild(idiv);
 	document.getElementById(pid+'').innerHTML=data[1];
 	pid+=1;
+}
+function popups(data){
+	 document.getElementById('popup').innerHTML=data[1];
+	 var x = document.getElementById("popup");
+	 x.className = "show";
+	 setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
 }
