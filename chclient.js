@@ -82,17 +82,26 @@ var pid=1;
 					colorarray[x][y]='';
 				}
 				if(num[x][y]==1){
+					if((x==0 && y==0) || (x==8 && y==0) || (x==0 && y==5) || (x==8 && y==5)){
+						document.getElementById(pt).innerHTML="<img src="+color+'Single.png' + " width=45px height=45px class='ballrotate'/>";
+					}
+					else{
 					document.getElementById(pt).innerHTML="<img src="+color+'Single.png' + " width=45px height=45px/>";
+					}
 					colorarray[x][y]=color;
 					//imgdiv.src=color+'Single.png';
 				}
 				if(num[x][y]==2){
-					document.getElementById(pt).innerHTML="<img src="+color+'Double.png' + " width=45px height=45px/>";
-					//imgdiv.src=color+'Double.png';
+					if(x==0 || y==0 || x==8 || y==5){
+						document.getElementById(pt).innerHTML="<img src="+color+'Double.png' + " width=45px height=45px class='ballrotate'/>";
+					}
+					else {
+						document.getElementById(pt).innerHTML="<img src="+color+'Double.png' + " width=45px height=45px class='ballslowrotate'/>";
+					}
 					colorarray[x][y]=color;
 				}
 				if(num[x][y]==3){
-					document.getElementById(pt).innerHTML="<img src="+color+'Triple.png' + " width=45px height=45px/>";
+					document.getElementById(pt).innerHTML="<img src="+color+'Triple.png' + " width=45px height=45px class='ballrotate'/>";
 					//imgdiv.src=color+'Triple.png';
 					colorarray[x][y]=color;
 
@@ -189,14 +198,14 @@ function checkWin()
   }
  if(a==b && a>=2)
  {
-   alert(player[0][0]+"won");
+   alert(player[0][0]+" won");
 	 player=[['','red'],['','green']];
 	 ws.send(JSON.stringify(['reinit']));
 	 location.reload();
  }
  if(a==c && a>=2)
  {
-   alert(player[1][0]+"won");
+   alert(player[1][0]+" won");
 	 player=[['','red'],['','green']];
 	 ws.send(JSON.stringify(['reinit']));
 	 location.reload();

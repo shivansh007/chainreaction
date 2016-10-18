@@ -113,6 +113,30 @@
     to {bottom: 0; opacity: 0;}
 }
 
+.ballrotate{
+	position: relative;
+	animation: brot 2s linear infinite,mov .2s linear infinite;
+}
+@keyframes brot{
+	from{transform: rotate(0deg);}
+	to{transform: rotate(360deg);}
+}
+@keyframes mov{
+	from{left:1px;}
+	to{left:-1px;}
+}
+.ballslowrotate{
+	position: relative;
+	animation: brots 10s linear infinite,movs .8s linear infinite;
+}
+@keyframes brots{
+	from{transform: rotate(0deg);}
+	to{transform: rotate(360deg);}
+}
+@keyframes movs{
+	from{left:1px;}
+	to{left:-1px;}
+}
 	</style>
 </head>
 <body>
