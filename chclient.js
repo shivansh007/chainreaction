@@ -19,14 +19,11 @@ var pid=1;
 				}
 			}
 			function initiate(jdec)
-			{	//jdec=JSON.parse(arr);
-				var x=jdec[1];
+			{	var x=jdec[1];
 				var y=jdec[2];
 				num[x][y]++;
 				var pt=""+x+y;
 				document.getElementById(pt).innerHTML=num[x][y];
-				//console.log(colorarray);
-				//console.log(color);
 				check(x,y,num[x][y],color);
 				checkWin();
 			}
@@ -89,7 +86,6 @@ var pid=1;
 					document.getElementById(pt).innerHTML="<img src="+color+'Single.png' + " width=45px height=45px/>";
 					}
 					colorarray[x][y]=color;
-					//imgdiv.src=color+'Single.png';
 				}
 				if(num[x][y]==2){
 					if(x==0 || y==0 || x==8 || y==5){
@@ -102,7 +98,6 @@ var pid=1;
 				}
 				if(num[x][y]==3){
 					document.getElementById(pt).innerHTML="<img src="+color+'Triple.png' + " width=45px height=45px class='ballrotate'/>";
-					//imgdiv.src=color+'Triple.png';
 					colorarray[x][y]=color;
 
 				}
@@ -112,7 +107,6 @@ var pid=1;
 
 function setupChat(){
 	var HOST=location.origin.replace(/^http/,'ws');
-	//HOST="ws://chainreaction154.herokuapp.com:3000/";
 	ws=new WebSocket(HOST);
 	write("___________CHAIN REACTION___________")
 	write("______**developed by Blesson thomas**______");
@@ -143,27 +137,18 @@ function setupChat(){
 		write(">>>connection closed");
 		popups(['pop',"connection closed try reloading."]);
 	},false);
-	//sendName();
+
 }
 
+//onload call
 window.addEventListener("load",setupChat,false);
 
-/*function setupInput(pt){
-	var input = document.getElementById(pt);
-	input.addEventListener("keydown",function(e){
-		if(e.keyCode==13){
-			ws.send(this.value);
-			this.value="";
-		}
-	});
-}*/
 function sendName(){
 	var arr=['initializePlayer',name];
 	var data=JSON.stringify(arr);
 	ws.send(data);
 }
 function write(str){
-	//var response = document.getElementById("response"),
 	console.log(str);
 	str=["logsContent",str,'black'];
 	logsContent(str);

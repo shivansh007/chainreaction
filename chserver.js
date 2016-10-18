@@ -1,11 +1,9 @@
-//var num=[[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0]];
 var players=2;
 var ch=0;
 var player=[['player1','red'],['player2','green']];
 var express=require('express');
 var app=express();
 port=process.env.PORT ||3000;
-//port=443;
 app.use(express.static(__dirname));
 app.get("/",function(req,res){
 	res.render("index.html");
