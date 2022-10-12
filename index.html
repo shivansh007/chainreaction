@@ -7,40 +7,39 @@
 	<link rel="stylesheet" href="main.css">
 	<script src="chclient.js"></script>
 	<style>
-	ul{
-			list-style-type: none;
-	    margin: 0;
-	    padding: 0;
-			width: 335px;
-	    overflow: hidden;
-	    background-color:rgb(0,0,50);
-			border-radius:5px 5px 0px 0px;
-			box-shadow: 0 4px 8px 1px rgba(0, 0, 0, 0.4), 0 6px 20px 1px rgba(0, 0, 0, 0.4);
+	ul {
+		list-style-type: none;
+	    	margin: 0;
+	    	padding: 0;
+		width: 335px;
+	    	overflow: hidden;
+	    	background-color:rgb(0,0,50);
+		border-radius:5px 5px 0px 0px;
+		box-shadow: 0 4px 8px 1px rgba(0, 0, 0, 0.4), 0 6px 20px 1px rgba(0, 0, 0, 0.4);
 	}
-	li{
+	li {
 		float: left;
-		#color: rgb(100,255,100);
 		font-size: 17px;
 		font-style: italic;
 	}
-	li a{
-	    display:block;
-	    color: white;
-			padding: 5px 5px;
-			text-decoration: none;
-			font-size:17px;
-			font-family:"Comic Sans MS", cursive, sans-serif;
-			font-style:italic;
+	li a {
+	    	display:block;
+	    	color: white;
+		padding: 5px 5px;
+		text-decoration: none;
+		font-size:17px;
+		font-family:"Comic Sans MS", cursive, sans-serif;
+		font-style:italic;
 	}
-	#dispname{
+	#dispname {
 		padding: 5px 20px 5px 5px;
 		color: rgb(100,255,100);
 	}
-	#chcol{
+	#chcol {
 		width: 330px;
 		border:2px solid blue;
 	}
-	.logs{
+	.logs {
 		display: none;
 		position: fixed;
 		z-index: 1;
@@ -50,11 +49,11 @@
 		box-shadow: 1px 1px 10px #a9a9a9;
 		border-radius: 3px 3px 0px 0px;
 		animation-name: animateright;
-    animation-duration: 0.4s;
+    		animation-duration: 0.4s;
 	}
 	@keyframes animateright {
-    from {height:0px; opacity:1}
-    to {height:495px; opacity:1}
+    		from {height:0px; opacity:1}
+    		to {height:495px; opacity:1}
 	}
 	.logsHeader{
 		font-family:"Comic Sans MS", cursive, sans-serif;
@@ -65,17 +64,16 @@
 		box-shadow: 1px 1px 10px #a9a9a9;
 	}
 	.close {
-    color:#000000;
+    		color:#000000;
 		position:absolute;
 		top:1px;
-    font-weight: bold;
+    		font-weight: bold;
 	}
-
 	.close:hover,
 	.close:focus {
-    color: red;
-    text-decoration: none;
-    cursor: pointer;
+    		color: red;
+    		text-decoration: none;
+    		cursor: pointer;
 	}
 	.logsbody{
 		font-family:"Comic Sans MS", cursive, sans-serif;
@@ -87,56 +85,56 @@
 		overflow:auto;
 	}
 	#popup {
-    visibility: hidden; /* Hidden by default. Visible on click */
-    min-width: 250px; /* Set a default minimum width */
-    margin-left: -125px; /* Divide value of min-width by 2 */
-    background-color: #333; /* Black background color */
-    color: #fff; /* White text color */
-    text-align: center; /* Centered text */
-    border-radius: 2px; /* Rounded borders */
-    padding: 16px; /* Padding */
-    position: fixed; /* Sit on top of the screen */
-    z-index: 1; /* Add a z-index if needed */
-    left: 50%; /* Center the snackbar */
-    bottom: 30px; /* 30px from the bottom */
-}
-#popup.show {
-    visibility: visible;
-    animation: fadein 0.5s, fadeout 0.5s 2.5s;
-}
-@keyframes fadein {
-    from {bottom: 0; opacity: 0;}
-    to {bottom: 30px; opacity: 1;}
-}
-@keyframes fadeout {
-    from {bottom: 30px; opacity: 1;}
-    to {bottom: 0; opacity: 0;}
-}
+    		visibility: hidden; /* Hidden by default. Visible on click */
+    		min-width: 250px; /* Set a default minimum width */
+		margin-left: -125px; /* Divide value of min-width by 2 */
+		background-color: #333; /* Black background color */
+		color: #fff; /* White text color */
+		text-align: center; /* Centered text */
+		border-radius: 2px; /* Rounded borders */
+		padding: 16px; /* Padding */
+		position: fixed; /* Sit on top of the screen */
+		z-index: 1; /* Add a z-index if needed */
+		left: 50%; /* Center the snackbar */
+		bottom: 30px; /* 30px from the bottom */
+	}
+	#popup.show {
+    		visibility: visible;
+    		animation: fadein 0.5s, fadeout 0.5s 2.5s;
+	}
+	@keyframes fadein {
+    		from {bottom: 0; opacity: 0;}
+    		to {bottom: 30px; opacity: 1;}
+	}
+	@keyframes fadeout {
+    		from {bottom: 30px; opacity: 1;}
+    		to {bottom: 0; opacity: 0;}
+	}
 
-.ballrotate{
-	position: relative;
-	animation: brot 2s linear infinite,mov .2s linear infinite;
-}
-@keyframes brot{
-	from{transform: rotate(0deg);}
-	to{transform: rotate(360deg);}
-}
-@keyframes mov{
-	from{left:1px;}
-	to{left:-1px;}
-}
-.ballslowrotate{
-	position: relative;
-	animation: brots 10s linear infinite,movs .8s linear infinite;
-}
-@keyframes brots{
-	from{transform: rotate(0deg);}
-	to{transform: rotate(360deg);}
-}
-@keyframes movs{
-	from{left:1px;}
-	to{left:-1px;}
-}
+	.ballrotate{
+		position: relative;
+		animation: brot 2s linear infinite,mov .2s linear infinite;
+	}
+	@keyframes brot{
+		from{transform: rotate(0deg);}
+		to{transform: rotate(360deg);}
+	}
+	@keyframes mov{
+		from{left:1px;}
+		to{left:-1px;}
+	}
+	.ballslowrotate{
+		position: relative;
+		animation: brots 10s linear infinite,movs .8s linear infinite;
+	}
+	@keyframes brots{
+		from{transform: rotate(0deg);}
+		to{transform: rotate(360deg);}
+	}
+	@keyframes movs{
+		from{left:1px;}
+		to{left:-1px;}
+	}
 	</style>
 </head>
 <body>
